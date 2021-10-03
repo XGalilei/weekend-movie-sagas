@@ -11,7 +11,11 @@ function Details({movie}) {
     }
 
     return <div>
-
+        <img src={movie.poster} alt={movie.title}/>
+        <div>
+            <h3>{movie.title}</h3>
+            <p>{movie.description}</p>
+        </div>
         <button onClick={returnToList}>Back to List</button>
     </div>
 
