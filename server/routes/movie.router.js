@@ -16,6 +16,17 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/details', (req, res) => {
+  const movieId = req.body;
+  const query = `SELECT * FROM "movies" WHERE "id" = $1`;
+  pool.query(query, movieId).then(
+    res.send(result)
+  ).catch(err =>  {
+    console.log('ERROR: Get single movie', err);
+    res.sendStatus(500);
+  })
+});
+
 router.post('/', (req, res) => {
   console.log(req.body);
   // RETURNING "id" will give us back the id of the created movie
