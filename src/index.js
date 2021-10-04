@@ -21,6 +21,7 @@ const movieTemp = {id: 1,
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_A_MOVIE', fetchOneMovie);
+    yield takeEvery('ADD_MOVIE', addMovie);
 }
 
 function* fetchAllMovies() {
@@ -47,6 +48,16 @@ function* fetchOneMovie(movieID) {
     }
     catch (error){
         console.log('get single error', error);
+    }
+}
+
+function* addMovie(action) {
+    try {
+        yield axios.post('/api/movie', action.payload);
+        yield put({type: 'FETCH_MOVIES'});
+    }
+    catch (error) {
+        console.log('Add Movie error:', error);
     }
 }
 

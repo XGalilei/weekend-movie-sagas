@@ -66,4 +66,20 @@ router.post('/', (req, res) => {
   })
 })
 
+// retrieves all genres for a specific film
+router.get('/genres/:id', (req, res) => {
+  const movieId = req.params.id;
+  const queryText = `SELECT genre_id from movies_genres
+  WHERE movie_id = $1;`;
+  pool.query(queryText, [movieId]).then(result => 
+    res.send(result.rows)
+  ).catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
+})
+
+//The following code was intended to be inplemented, but I ran out of time
+//Pulling the genres for the 
+
 module.exports = router;
