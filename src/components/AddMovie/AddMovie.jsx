@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function AddMovie() {
 
@@ -10,6 +10,7 @@ function AddMovie() {
     const [description, setDescription] = useState('');
     const [genres, setGenres] = useState([]);
     const dispatch = useDispatch();
+    const genreList = useSelector(store => store.genres);
 
     const submitMovie = (event) => {
         event.preventDefault();
@@ -49,6 +50,9 @@ function AddMovie() {
                 onChange={(event) => setDescription(event.target.value)}
             >
             </textarea> <br />
+            <select name = "gen" id= "gen" multiple>
+            </select>
+            {genres.map(genre)}
             <button onClick={returnToList}>Cancel</button>
             <button>Save</button>
         </form>

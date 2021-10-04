@@ -21,6 +21,7 @@ const movieTemp = {id: 1,
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_A_MOVIE', fetchOneMovie);
+    yield takeEvery('FETCH_GENRES', fetchGenres);
     yield takeEvery('ADD_MOVIE', addMovie);
 }
 
@@ -58,6 +59,16 @@ function* addMovie(action) {
     }
     catch (error) {
         console.log('Add Movie error:', error);
+    }
+}
+
+function* fetchGenres() {
+    try {
+        const genres = yield axios.get('/api/genre');
+        yield put({type: 'SET_GENRES', payload: genres.data})
+    }
+    catch (error) {
+        console.log('Get genres error:', error);
     }
 }
 
