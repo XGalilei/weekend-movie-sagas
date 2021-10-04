@@ -16,11 +16,13 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/details', (req, res) => {
-  const movieId = req.body;
-  const query = `SELECT * FROM "movies" WHERE "id" = $1`;
-  pool.query(query, movieId).then(
-    res.send(result)
+router.get('/details/:id', (req, res) => {
+  const movieId = req.params.id;
+  const query = `SELECT * FROM "movies" WHERE "id" = $1;`;
+  pool.query(query, [movieId]).then(result => {
+    //console.log(result.rows[0]);
+    res.send(result.rows[0]);
+  }
   ).catch(err =>  {
     console.log('ERROR: Get single movie', err);
     res.sendStatus(500);

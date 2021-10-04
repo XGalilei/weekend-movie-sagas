@@ -1,14 +1,23 @@
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function Details({movie}) {
+function Details() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const movie = useSelector(store => store.currentMovie);
+    const [ID, setID] = useState(0); 
 
     const returnToList = () => {
         history.push('/');
     }
+
+    useEffect(() => {
+        //console.log(movie);
+        //dispatch({type: 'FETCH_A_MOVIE', payload: movie})
+        
+    })
 
     return <div>
         <img src={movie.poster} alt={movie.title}/>

@@ -13,11 +13,10 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
-    const getDetails = (event) => {
-        event.preventDefault();
-        console.log('testing');
-        console.log(event.target.id);
-        history.push(`/details/${event.target.id}`)
+    const getDetails = (movieID) => {
+        console.log(movieID);
+        dispatch({type: "FETCH_A_MOVIE", payload: movieID});
+        history.push(`/details/${movieID}`)
     }
 
     return (
@@ -30,7 +29,7 @@ function MovieList() {
                             <h3>{movie.title}</h3>
                             <img src={movie.poster} alt={movie.title} 
                             id={movie.id}
-                            onClick={getDetails}/>
+                            onClick={() => getDetails(movie.id)}/>
                         </div>
                     );
                 })}
